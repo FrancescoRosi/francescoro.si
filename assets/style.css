@@ -60,71 +60,77 @@ body {
 .link {
     transform: translateX(4rem);
 }
-.line:first-of-type .char:nth-child(1) {
+.line .char, .line {
     animation: slideInFromBottom 500ms ease-out forwards;
 }
 .line:first-of-type .char:nth-child(2) {
-    animation: slideInFromBottom 500ms 25ms ease-out forwards;
+    animation-delay: 25ms;
 }
 .line:first-of-type .char:nth-child(3) {
-    animation: slideInFromBottom 500ms 50ms ease-out forwards;
+    animation-delay: 50ms;
 }
 .line:first-of-type .char:nth-child(4) {
-    animation: slideInFromBottom 500ms 75ms ease-out forwards;
+    animation-delay: 75ms;
 }
 .line:first-of-type .char:nth-child(5) {
-    animation: slideInFromBottom 500ms 100ms ease-out forwards;
+    animation-delay: 100ms;
 }
 .line:first-of-type .char:nth-child(6) {
-    animation: slideInFromBottom 500ms 125ms ease-out forwards;
+    animation-delay: 125ms;
 }
 .line:first-of-type .char:nth-child(7) {
-    animation: slideInFromBottom 500ms 150ms ease-out forwards;
+    animation-delay: 150ms;
 }
 .line:first-of-type .char:nth-child(8) {
-    animation: slideInFromBottom 500ms 175ms ease-out forwards;
+    animation-delay: 175ms;
 }
 .line:first-of-type .char:nth-child(9) {
-    animation: slideInFromBottom 500ms 200ms ease-out forwards;
+    animation-delay: 200ms;
 }
 .line:nth-of-type(2) .char:nth-child(1) {
-    animation: slideInFromBottom 500ms 225ms ease-out forwards;
+    animation-delay: 225ms;
 }
 .line:nth-of-type(2) .char:nth-child(2) {
-    animation: slideInFromBottom 500ms 250ms ease-out forwards;
+    animation-delay: 250ms;
 }
 .line:nth-of-type(2) .char:nth-child(3) {
-    animation: slideInFromBottom 500ms 275ms ease-out forwards;
+    animation-delay: 275ms;
 }
 .line:nth-of-type(2) .char:nth-child(4) {
-    animation: slideInFromBottom 500ms 300ms ease-out forwards;
+    animation-delay: 300ms;
 }
 #subtitle .line:nth-child(1) {
-    animation: slideInFromBottom 500ms 1.3s ease-out forwards;
+    animation-delay: 1.3s;
 }
 #subtitle .line:nth-child(2) {
-    animation: slideInFromBottom 500ms 1.4s ease-out forwards;
+    animation-delay: 1.4s;
 }
 #subtitle .line:nth-child(3) {
-    animation: slideInFromBottom 500ms 1.5s ease-out forwards;
+    animation-delay: 1.5s;
 }
 #subtitle .line:nth-child(4) {
-    animation: slideInFromBottom 500ms 1.6s ease-out forwards;
+    animation-delay: 1.6s;
+}
+#links .link {
+    animation: slideInFromRight 500ms ease-out forwards;
 }
 #links .link:nth-child(1) {
-    animation: slideInFromRight 500ms 2.6s ease-out forwards;
+    animation-delay: 2.6s;
 }
 #links .link:nth-child(2) {
-    animation: slideInFromRight 500ms 2.7s ease-out forwards;
+    animation-delay: 2.7s;
 }
 #links .link:nth-child(3) {
-    animation: slideInFromRight 500ms 2.8s ease-out forwards;
+    animation-delay: 2.8s;
 }
 #links .link:nth-child(4) {
-    animation: slideInFromRight 500ms 2.9s ease-out forwards;
+    animation-delay: 2.9s;
 }
 #links .link:nth-child(5) {
-    animation: slideInFromRight 500ms 3s ease-out forwards;
+    animation-delay: 3s;
+}
+#links .link:nth-child(6) {
+    animation-delay: 3.1s;
 }
 #subtitle {
     margin: 0;
