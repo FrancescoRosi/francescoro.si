@@ -1,0 +1,289 @@
+@font-face {
+    font-family: "Kalnia";
+    src: url(/assets/kalnia.ttf);
+}
+@font-face {
+    font-family: "Nohemi";
+    src: url(/assets/nohemi.ttf);
+}
+@keyframes slideInFromBottom {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slideInFromRight {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+html, body {
+    width: 100vw;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(at right bottom, #010101, #303030);
+}
+body {
+    background: linear-gradient(308deg, black, transparent);
+}
+main {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+#main-title {
+    text-shadow: 0 0 20px black;
+    flex-direction: column;
+    margin: 0;
+    font-family: Kalnia;
+    font-weight: 700;
+    color: white;
+    line-height: 11.6666vw;
+    font-size: 15.5vw;
+    letter-spacing: -0.5vw;
+    position: absolute;
+    bottom: 0;
+    mix-blend-mode: soft-light;
+    user-select: none;
+    pointer-events: none;
+}
+#main-title, .line {
+    display: flex;
+}
+.char, #subtitle, body.initial-animation #links > * {
+    opacity: 0;
+}
+.char, #subtitle {
+    transform: translateY(2rem);
+}
+body.initial-animation #links > * {
+    transform: translateX(2rem);
+}
+.line .char, #subtitle {
+    animation: slideInFromBottom 500ms ease-out forwards;
+}
+.line:first-of-type {
+    .char {
+        @for $i from 2 through 9 {
+            &:nth-child(#{$i}) {
+                animation-delay: #{($i - 1) * 25ms};
+            }
+        }
+    }
+}
+.line:nth-of-type(2) {
+    .char {
+        @for $i from 1 through 4 {
+            &:nth-child(#{$i}) {
+                animation-delay: #{($i + 8) * 25ms};
+            }
+        }
+    }
+}
+body.initial-animation #links > * {
+    animation-name: slideInFromRight;
+    animation-duration: 500ms;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+#links {
+    > * {
+        @for $i from 1 through 11 {
+            &:nth-child(#{$i}) {
+                animation-delay: #{2.5s + $i * 0.1s};
+            }
+        }
+    }
+}
+#subtitle {
+    margin: 0;
+    font-family: Nohemi;
+    font-weight: 400;
+    color: white;
+    font-size: calc(var(--font-size) / 1.3333333333333);
+    mix-blend-mode: soft-light;
+    max-width: 50vw;
+    padding-bottom: 0;
+    animation-delay: 1s;
+    position: sticky;
+    top: 0;
+}
+#dot {
+    display: none;
+}
+@media (pointer: fine) {
+    #dot {
+        display: block;
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-radius: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 1rem;
+        box-shadow: 0 4px 30px rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        border: 0.25px solid rgba(255, 255, 255, 0.1);
+        opacity: 0;
+        transition: transform 250ms ease-in-out;
+        pointer-events: none;
+        z-index: 999;
+    }
+    body:hover #dot {
+        opacity: 1;
+    }
+}
+#arrow.rotate {
+    transform: rotate(45deg);
+}
+#links, #subtitle {
+    padding: 2rem;
+}
+#links:not([data-page="main"]) {
+    display: none;
+}
+#links {
+    height: max-content;
+    overflow-y: auto;
+    overflow-x: hidden;
+    mask-image: linear-gradient(to bottom, transparent, black 2rem, black calc(100% - 2rem), transparent), linear-gradient(black, black);
+    mask-size: calc(100% - 0.5rem) 100%, 0.5rem 100%;
+    mask-position: 0 0, 100% 0;
+    mask-repeat: no-repeat, no-repeat;
+    transition: 150ms ease-out transform;
+    min-width: 25vw;
+}
+:root {
+    --font-size: 3.5rem;
+}
+.hidden {
+    display: none !important;
+}
+.visible {
+    display: block !important;
+}
+#links .link {
+    font-family: 'Nohemi';
+    font-weight: 400;
+    font-size: var(--font-size);
+    background: rgba(100, 100, 100, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.5px);
+    -webkit-backdrop-filter: blur(5.5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    padding: calc(var(--font-size) / 3.5);
+}
+#links .link:not(:last-of-type) {
+    margin-bottom: 1rem;
+}
+#links div.link div {
+    color: white;
+    font-size: calc(var(--font-size) / 2);
+    line-height: calc(var(--font-size) / 1.66666666666);
+    max-width: 30vw;
+}
+#links a {
+    color: white;
+    text-decoration: none;
+    cursor: default;
+    margin-bottom: calc(var(--font-size) - var(--font-size) - var(--font-size) / 4.666666666666667);
+    transition: 500ms font-weight;
+}
+#links a:hover {
+    font-weight: 900;
+}
+.social-icon {
+    width: calc(var(--font-size) / 1.4);
+    height: calc(var(--font-size) / 1.4);
+    margin-right: 1rem;
+} 
+.new-tab-icon {
+    padding: 6px 0;
+    width: calc(var(--font-size) / 2.33333333333);
+    height: calc(var(--font-size) / 2.33333333333);
+}
+.new-page-icon {
+    padding: 6px 0;
+    width: calc(var(--font-size) / 2.33333333333);
+    height: calc(var(--font-size) / 2.33333333333);
+    transform: rotate(45deg);
+}
+#arrow {
+    mix-blend-mode: difference;
+}
+#links h1 {
+    margin-top: 0;
+    color: white;
+    font-family: "Nohemi";
+    font-size: calc(var(--font-size) * 1.25);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+#links h1 .back-icon {
+    width: calc(var(--font-size) * 1);
+    height: calc(var(--font-size) * 1);
+    margin-bottom: 12px;
+    margin-right: 1rem;
+    transition: 250ms ease-out;
+    background-size: 125%;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: repeat-x;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40px' viewBox='0 -960 960 960' width='40px' fill='%23ffffff'%3E%3Cpath d='m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z'/%3E%3C/svg%3E");
+    cursor: pointer;
+}
+#links h1 .back-icon:hover {
+    animation: backIcon 750ms linear infinite;
+}
+#links .link div {
+    font-weight: 400;
+}
+#discord-username-copied {
+    height: 0;
+    overflow: hidden;
+}
+.wip {
+    background: rgb(255 0 0 / 25%) !important;
+    color: white;
+    justify-content: center;
+    font-size: calc(var(--font-size) / 2) !important;
+}
+@keyframes backIcon {
+    from {
+        background-position-x: 50%;
+    }
+    to {
+        background-position-x: 550%;
+    }
+}
+@media screen and (min-height: 100vw) {
+    main {
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    #links {
+        margin-bottom: calc(23.3332vw + 4rem);
+    }
+    #subtitle {
+        padding-bottom: 1rem;
+        max-width: initial;
+    }
+    :root {
+        --font-size: 2.75rem;
+    }
+    #main-title {
+        mix-blend-mode: normal;
+        filter: opacity(0.15);
+    }
+    #links div.link div {
+        max-width: 100vw;
+    }
+}
