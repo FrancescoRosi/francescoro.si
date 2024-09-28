@@ -1,3 +1,16 @@
+if (location.search === "?qp") {
+    document.querySelectorAll(".qp-turn-off").forEach(el => el.remove());
+    localStorage.setItem("qp", Date.now() + 1209600000);
+};
+
+if (localStorage.getItem("qp") != null) {
+    if (Date.now() > parseInt(localStorage.getItem("qp"))) {
+        localStorage.removeItem("qp");
+    } else {
+        document.querySelectorAll(".qp-turn-off").forEach(el => el.remove());
+    };
+};
+
 if (matchMedia("(pointer:fine)").matches) {
     window.addEventListener("mousemove", e => {
         const dot = document.querySelector("#dot"),
