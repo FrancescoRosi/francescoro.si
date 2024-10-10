@@ -40,6 +40,7 @@ if (matchMedia("(pointer:fine)").matches) {
 };
 
 if (location.hash != "" && document.querySelector(`#links[data-page="${location.hash.slice(1)}"]`) != null) {
+    document.body.classList.add("show-overflow");
     document.querySelector(`[data-page="main"]`).classList.remove("visible");
     document.querySelector(`[data-page="main"]`).classList.add("hidden");
     document.querySelector(`[data-page="${location.hash.slice(1)}"]`).classList.add("visible");

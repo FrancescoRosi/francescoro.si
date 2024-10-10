@@ -35,6 +35,12 @@ main {
     justify-content: space-between;
     overflow-y: auto;
 }
+body.initial-animation main {
+    overflow-y: hidden;
+}
+body.show-overflow main {
+    overflow-y: auto;
+}
 #main-title {
     text-shadow: 0 0 20px black;
     flex-direction: column;
