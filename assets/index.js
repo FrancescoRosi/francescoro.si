@@ -37,21 +37,37 @@ if (matchMedia("(pointer:fine)").matches) {
             fill: "forwards"
         })
     });
+
+} else {
+    window.addEventListener("contextmenu", e => {
+        e.preventDefault()
+    });
 };
 
-if (location.hash != "" && document.querySelector(`#links[data-page="${location.hash.slice(1)}"]`) != null) {
+if (location.hash != "" && document.querySelector(`.links[data-page="${location.hash.slice(1)}"]`) != null) {
     document.body.classList.add("show-overflow");
     document.querySelector(`[data-page="main"]`).classList.remove("visible");
     document.querySelector(`[data-page="main"]`).classList.add("hidden");
     document.querySelector(`[data-page="${location.hash.slice(1)}"]`).classList.add("visible");
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("div.link div:not(div.link > div:first-child, #discord-username-copied)").forEach(el => {
+            el.style.cssText = `--height: ${el.scrollHeight}px;`;
+        });
+    });
 };
 
 window.changePage = (page) => {
     if (page === "") {
         page = "main";
+    } else if (page === "projects") {
+        setTimeout(() => {
+            document.querySelectorAll("div.link div:not(div.link > div:first-child, #discord-username-copied)").forEach(el => {
+                el.style.cssText = `--height: ${el.scrollHeight}px;`;
+            });
+        }, 500);
     };
     document.body.classList.remove("initial-animation");
-    document.querySelector("#links.visible").animate({
+    document.querySelector(".links.visible").animate({
         transform: "scale(0.95)",
         opacity: "0.9",
         filter: "blur(5px)"
@@ -59,8 +75,8 @@ window.changePage = (page) => {
         duration: 150
     });
     setTimeout(() => {
-        document.querySelector("#links.visible").classList.add("hidden");
-        document.querySelector("#links.visible").classList.remove("visible");
+        document.querySelector(".links.visible").classList.add("hidden");
+        document.querySelector(".links.visible").classList.remove("visible");
         document.querySelector(`[data-page="${page}"]`).classList.add("visible");
         document.querySelector(`[data-page="${page}"]`).classList.remove("hidden");
         document.querySelector(`[data-page="${page}"]`).animate([{
@@ -88,15 +104,19 @@ document.querySelectorAll(`a[href^="#"]`).forEach(el => {
 window.discordLink = () => {
     navigator.clipboard.writeText("francescorosi")
         .then(() => {
-            document.querySelector("#discord-username-copied").animate({
-                height: "calc(var(--font-size) / 1.75)"
+            document.querySelector(".links.visible #discord-username-copied").animate({
+                height: "calc(var(--font-size) / 1.75)",
+                marginTop: "0.75rem",
+                marginBottom: "-0.5rem"
             }, {
                 duration: 250,
                 easing: "ease-out",
                 fill: "forwards"
             });
-            document.querySelector("#discord-username-copied").animate({
-                height: "0"
+            document.querySelector(".links.visible #discord-username-copied").animate({
+                height: "0",
+                marginTop: "0",
+                marginBottom: "0"
             }, {
                 duration: 250,
                 delay: 5250,

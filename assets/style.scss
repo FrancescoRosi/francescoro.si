@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Kalnia";
-    src: url(/assets/kalnia.ttf);
+    src: url(/assets/kalnia.woff2);
 }
 @font-face {
     font-family: "Nohemi";
-    src: url(/assets/nohemi.ttf);
+    src: url(/assets/nohemi.woff2);
 }
 @keyframes slideInFromBottom {
     to {
@@ -17,6 +17,32 @@
         transform: translateX(0);
         opacity: 1;
     }
+}
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+}
+::-webkit-scrollbar-thumb {
+    background: #636363;
+    border: 0px none #ffffff;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #7e7e7e;
+}
+::-webkit-scrollbar-thumb:active {
+    background: #c2c2c2;
+}
+::-webkit-scrollbar-track {
+    background: #111111;
+    border: 0px none #ffffff;
+}
+::-webkit-scrollbar-corner {
+    background: transparent;
 }
 html, body {
     width: 100vw;
@@ -60,13 +86,13 @@ body.show-overflow main {
 #main-title, .line {
     display: flex;
 }
-.char, #subtitle, body.initial-animation #links > * {
+.char, #subtitle, body.initial-animation .links > * {
     opacity: 0;
 }
 .char, #subtitle {
     transform: translateY(2rem);
 }
-body.initial-animation #links > * {
+body.initial-animation .links > * {
     transform: translateX(2rem);
 }
 .line .char, #subtitle {
@@ -90,13 +116,13 @@ body.initial-animation #links > * {
         }
     }
 }
-body.initial-animation #links > * {
+body.initial-animation .links > * {
     animation-name: slideInFromRight;
     animation-duration: 500ms;
     animation-timing-function: ease-out;
     animation-fill-mode: forwards;
 }
-#links {
+.links {
     > * {
         @for $i from 1 through 11 {
             &:nth-child(#{$i}) {
@@ -146,13 +172,14 @@ body.initial-animation #links > * {
 #arrow.rotate {
     transform: rotate(45deg);
 }
-#links, #subtitle {
+.links, #subtitle {
     padding: 2rem;
 }
-#links:not([data-page="main"]) {
+.links:not([data-page="main"]) {
     display: none;
 }
-#links {
+.links {
+    max-width: 30vw;
     height: max-content;
     overflow-y: auto;
     overflow-x: hidden;
@@ -163,6 +190,13 @@ body.initial-animation #links > * {
     transition: 150ms ease-out transform;
     min-width: 25vw;
 }
+.links[data-page="projects"] .link {
+    font-size: calc(var(--font-size) / 1.25);
+}
+.links[data-page="projects"] .link .social-icon {
+    width: calc(var(--font-size) / 1.6);
+    height: calc(var(--font-size) / 1.6);
+}
 :root {
     --font-size: 3.5rem;
 }
@@ -172,7 +206,7 @@ body.initial-animation #links > * {
 .visible {
     display: block !important;
 }
-#links .link {
+.links .link {
     font-family: 'Nohemi';
     font-weight: 400;
     font-size: var(--font-size);
@@ -182,27 +216,50 @@ body.initial-animation #links > * {
     backdrop-filter: blur(5.5px);
     -webkit-backdrop-filter: blur(5.5px);
     border: 1px solid rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
     padding: calc(var(--font-size) / 3.5);
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    overflow: hidden;
 }
-#links .link:not(:last-of-type) {
+.links .link:not(:last-of-type) {
     margin-bottom: 1rem;
 }
-#links div.link div {
+.links div.link div:not(div.link > div:first-child, #discord-username-copied, [data-page="socials"] .link div) {
+    margin-top: 1rem;
+    height: 0px;
+    transform: translateY(1rem);
+    margin-bottom: -0.5rem;
+    color: white;
+    font-size: calc(var(--font-size) / 2.25);
+    line-height: calc(var(--font-size) / 1.8888888);
+    max-width: 30vw;
+    transition: 500ms all;
+    opacity: 0;
+}
+div.link > div:first-child, #discord-username-copied, [data-page="socials"] .link div {
     color: white;
     font-size: calc(var(--font-size) / 2);
-    line-height: calc(var(--font-size) / 1.66666666666);
+    line-height: calc(var(--font-size) / 1.66666666);
     max-width: 30vw;
 }
-#links a {
+[data-page="socials"] .link div {
+    margin-top: 0.75rem;
+    margin-bottom: -0.5rem;
+}
+div.link:hover div:not(div.link > div:first-child, #discord-username-copied, [data-page="socials"] .link div) {
+    height: var(--height);
+    transform: translateY(0);
+    opacity: 1;
+}
+.links a {
     color: white;
     text-decoration: none;
     cursor: default;
     margin-bottom: calc(var(--font-size) - var(--font-size) - var(--font-size) / 4.666666666666667);
     transition: 500ms font-weight;
 }
-#links a:hover {
+.links a:hover {
     font-weight: 900;
 }
 .social-icon {
@@ -224,7 +281,7 @@ body.initial-animation #links > * {
 #arrow {
     mix-blend-mode: difference;
 }
-#links h1 {
+.links h1 {
     margin-top: 0;
     color: white;
     font-family: "Nohemi";
@@ -233,7 +290,7 @@ body.initial-animation #links > * {
     display: flex;
     align-items: center;
 }
-#links h1 .back-icon {
+.links h1 .back-icon {
     width: calc(var(--font-size) * 1);
     height: calc(var(--font-size) * 1);
     margin-bottom: 12px;
@@ -246,10 +303,10 @@ body.initial-animation #links > * {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40px' viewBox='0 -960 960 960' width='40px' fill='%23ffffff'%3E%3Cpath d='m287-446.67 240 240L480-160 160-480l320-320 47 46.67-240 240h513v66.66H287Z'/%3E%3C/svg%3E");
     cursor: pointer;
 }
-#links h1 .back-icon:hover {
+.links h1 .back-icon:hover {
     animation: backIcon 750ms linear infinite;
 }
-#links .link div {
+.links .link div {
     font-weight: 400;
 }
 #discord-username-copied {
@@ -261,6 +318,21 @@ body.initial-animation #links > * {
     color: white;
     justify-content: center;
     font-size: calc(var(--font-size) / 2) !important;
+    line-height: calc(var(--font-size) / 1.75);
+}
+.not-all {
+    background: rgb(255 100 0 / 25%) !important;
+    color: white;
+    justify-content: center;
+    font-size: calc(var(--font-size) / 2) !important;
+    margin-top: 2.5rem;
+    line-height: calc(var(--font-size) / 1.75);
+}
+.not-all ~ .link {
+    font-size: var(--font-size) !important;
+}
+.long-press {
+    display: none !important;
 }
 @keyframes backIcon {
     from {
@@ -275,8 +347,9 @@ body.initial-animation #links > * {
         flex-direction: column;
         justify-content: flex-start;
     }
-    #links {
+    .links {
         margin-bottom: calc(23.3332vw + 4rem);
+        max-width: 100vw;
     }
     #subtitle {
         padding-bottom: 1rem;
@@ -289,7 +362,10 @@ body.initial-animation #links > * {
         mix-blend-mode: normal;
         filter: opacity(0.15);
     }
-    #links div.link div {
-        max-width: 100vw;
+    .links div.link div {
+        max-width: 100vw !important;
+    }
+    .long-press {
+        display: block !important;
     }
 }
